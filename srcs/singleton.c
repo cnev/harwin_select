@@ -36,8 +36,23 @@ int				get_fd(void)
 	return (instance);
 }
 
+void			*get_termios(int end)
+{
+	static struct termios	*instance = NULL;
+
+	if (!instance && !end)
+	{
+		if (!(instance = (struct termios *)malloc(sizeof(struct termios))))
+			ft_exit();
+	}
+	else if (instance && end)
+		free(instance);
+	return (instance);
+}
+
 void			ft_exit(void)
 {
 	term_off();
-	get_glob(1);
+	get_glob(TRUE);
+	get_termios(TRUE);
 }
