@@ -1,0 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   singleton.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vjung <vjung@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/10/24 16:41:25 by vjung             #+#    #+#             */
+/*   Updated: 2014/10/24 16:41:25 by vjung            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+t_glob			get_glob(int end)
+{
+	static t_glob	*donjon = NULL;
+
+	if (!donjon && !end)
+	{
+		if (!(donjon = (t_glob *)malloc(sizeof(t_glob))))
+			ft_exit();
+	}
+	else if (donjon && end)
+		free(donjon);
+	return (donjon);
+}
+
+void			ft_exit(void)
+{
+	term_off();
+	get_glob(1);
+}
