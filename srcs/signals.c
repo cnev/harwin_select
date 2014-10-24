@@ -12,5 +12,58 @@
 
 void			signals_on(void)
 {
-	signal(,)
+	signal(SIGWINCH, signal_handler);
+	signal(SIGTSTP, signal_handler);
+	signal(SIGINT, signal_handler);
+	signal(SIGTERM, signal_handler);
+}
+
+void			handle_winch(void)
+{
+	struct winsize	w;
+
+	signal(SIGWINCH, SIG_IGN);
+	ioctl(0, TIOCGWINSZ, &w);
+	(MAP)->wcol = w.ws_col;
+	(MAP)->wlin = w.ws_row;
+	reinit_list(MAP);
+	//print_array(MAP);
+	signal(SIGWINCH, signal_handler);
+}
+
+void			handle_tstp(void)
+{
+	char			cp[2];
+
+	cp[0] = (TERM)->c_cc[VSUSP];
+	cp[1] = 0;
+	term_off(TERM);
+	signal(SIGTSTP, SIG_DFL);
+	signal(SIGCONT, signal_handler);
+	ioctl(0, TIOCSTI, cp);
+}
+
+void			handle_cont(void)
+{
+	term_on(TERM);
+	signal(SIGCONT, SIG_DFL);
+	signal(SIGTSTP, signal_handler);
+	//print_array(MAP);
+}
+
+void			handle_killers(void)
+{
+	ft_exit();
+}
+
+void			signal_handler(int sig)
+{
+	if (sig == SIGTSTP)
+		handle_tstp();
+	if (sig == SIGCONT)
+		handle_cont();
+	if (sig == SIGWINCH)
+		handle_winch();
+	if (sig == SIGINT || sig == SIGTERM)
+		handle_killers();
 }
