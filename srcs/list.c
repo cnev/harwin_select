@@ -21,6 +21,7 @@ static t_data	*create_data(char *str, int x, int y)
 	new->str = str;
 	new->x = x;
 	new->y = y;
+	new->selected = FALSE;
 	return (new);
 }
 
@@ -44,7 +45,7 @@ static void		init_list(t_glob *glob, int ac, char **av)
 			y += 2;
 		}
 	}
-	glob->list->cursored = TRUE;
+	glob->cursor = glob->list;
 }
 
 void			reinit_list(t_glob *glob)
