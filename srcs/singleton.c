@@ -24,6 +24,18 @@ t_glob			get_glob(int end)
 	return (donjon);
 }
 
+int				get_fd(void)
+{
+	static int		instance = -1;
+
+	if (instance == -1)
+	{
+		if ((instance = open("/dev/tty", O_WRONLY)) < 0)
+			ft_exit();
+	}
+	return (instance);
+}
+
 void			ft_exit(void)
 {
 	term_off();
