@@ -20,4 +20,12 @@ int				exec_select(int ac, char **av)
 	signals_on();
 	tgetent(buf, getenv("TERM"));
 	create_list(ac, av);
+	while (buf2 != )
+	{
+		get_key(buf2);
+		print_list(get_glob(0));
+		buf2[0] = buf2[1] = buf2[2] = buf2[3] = 0;
+		read(0, buf2, 3);
+	}
+	print_output();
 }
