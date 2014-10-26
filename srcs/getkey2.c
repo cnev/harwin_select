@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   getkey2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vjung <vjung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/10/24 16:19:53 by vjung             #+#    #+#             */
-/*   Updated: 2014/10/24 16:19:53 by vjung            ###   ########.fr       */
+/*   Created: 2014/10/26 19:55:53 by vjung             #+#    #+#             */
+/*   Updated: 2014/10/26 19:55:54 by vjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/select.h"
 
-int				main(int ac, char **av)
+void			deletek(void)
 {
-	if (!(getenv("TERM")))
-	{
-		ft_putstr_fd("environment error\n", 2);
-		return (0);
-	}
-	if (ac < 2)
-	{
-		ft_putstr_fd("parameters error\n", 2);
-		return (0);
-	}
-	exec_select(ac, av);
-	return (0);
+	t_glob			*glob;
+	t_cdlist		*tmp;
+	t_cdlist		*next;
+
+	glob = get_glob(FALSE);
+	tmp = glob->cursor;
+	next = tmp->next;
+	if (tmp == tmp->next)
+		ft_exit();
+	cdlist_delone(&(glob->list), tmp);
+	glob->cursor = next;
+	reinit_list(GLOB);
 }

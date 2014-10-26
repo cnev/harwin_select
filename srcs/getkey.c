@@ -62,19 +62,3 @@ void			deletek2(void)
 	if (bu[0] == 126 && bu[1] == 0 && bu[2] == 0)
 		deletek();
 }
-
-void			deletek(void)
-{
-	t_glob			*glob;
-	t_cdlist		*tmp;
-	t_cdlist		*next;
-
-	glob = get_glob(FALSE);
-	tmp = glob->cursor;
-	next = tmp->next;
-	if (tmp == tmp->next)
-		ft_exit();
-	cdlist_delone(&(glob->list), tmp);
-	glob->cursor = next;
-	reinit_list(GLOB);
-}
