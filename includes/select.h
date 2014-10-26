@@ -64,6 +64,10 @@ void						cdlist_pushback(t_cdlist **head, void *data);
 void						cdlist_delone(t_cdlist **head, t_cdlist *del);
 
 void						print_list(t_cdlist *tmp);
+void						print_selected(t_data *tmp, int fd);
+void						print_cursor(t_data *tmp, int fd);
+void						print_selected_cursor(t_data *tmp, int fd);
+void						print_default(t_data *tmp, int fd);
 
 void						get_key(char *buf2);
 void						move_left(void);

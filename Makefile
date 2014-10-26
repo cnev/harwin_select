@@ -6,6 +6,7 @@ HEADERFOLDER = includes/
 
 SRC += srcs/cdlist.c
 SRC += srcs/display.c
+SRC += srcs/display2.c
 SRC += srcs/getkey.c
 SRC += srcs/getkey2.c
 SRC += srcs/list.c
