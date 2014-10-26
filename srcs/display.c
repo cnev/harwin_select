@@ -12,16 +12,27 @@
 
 #include "../includes/select.h"
 
+int					check_before_display(int x, int y)
+{
+	 if (x == -1 || y == -1)
+	 	return (TRUE);
+	 return (FALSE);
+}
+
 static void			print_selected(t_data *tmp, int fd)
 {
+	if (BAD_COORD)
+		return ;
 	tputs(tgoto(tgetstr("cm", NULL), X_POS, Y_POS), 1, tputs_putchar);
 	tputs(tgetstr("mr", NULL), 1, tputs_putchar);
 	write(fd, tmp->str, ft_strlen(tmp->str));
 	tputs(tgetstr("me", NULL), 1, tputs_putchar);
 }
 
-static void			print_cursor(t_data *tmp, int fd)
+static void			print_cursor(t_`data *tmp, int fd)
 {
+	if (BAD_COORD)
+		return ;
 	tputs(tgoto(tgetstr("cm", NULL), X_POS, Y_POS), 1, tputs_putchar);
 	tputs(tgetstr("us", NULL), 1, tputs_putchar);
 	write(fd, tmp->str, ft_strlen(tmp->str));
@@ -30,6 +41,8 @@ static void			print_cursor(t_data *tmp, int fd)
 
 static void			print_selected_cursor(t_data *tmp, int fd)
 {
+	if (BAD_COORD)
+		return ;
 	tputs(tgoto(tgetstr("cm", NULL), X_POS, Y_POS), 1, tputs_putchar);
 	tputs(tgetstr("mr", NULL), 1, tputs_putchar);
 	tputs(tgetstr("us", NULL), 1, tputs_putchar);
@@ -40,6 +53,8 @@ static void			print_selected_cursor(t_data *tmp, int fd)
 
 static void			print_default(t_data *tmp, int fd)
 {
+	if (BAD_COORD)
+		return ;
 	tputs(tgoto(tgetstr("cm", NULL), X_POS, Y_POS), 1, tputs_putchar);
 	write(fd, tmp->str, ft_strlen(tmp->str));
 }

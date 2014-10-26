@@ -12,7 +12,7 @@
 
 #include "../includes/select.h"
 
-static t_data	*create_data(char *str, int x, int y)
+static t_data	*set_data(char *str, int x, int y)
 {
 	t_data			*new;
 
@@ -37,15 +37,19 @@ static void		init_list(t_glob *glob, int ac, char **av)
 	glob->list = NULL;
 	while (++i < ac)
 	{
-		cdlist_pushback(&(glob->list), create_data(ft_strdup(av[i]), x, y));
-		x += glob->col_size;
-		if (x > glob->wcol)
+		if (x + glob->col_size < glob->wcol - 1)
+			cdlist_pushback(&(glob->list), set_data(ft_strdup(av[i]), x, y));
+		else
+			cdlist_pushback(&(glob->list), set_data(ft_strdup(av[i]), -1, -1));
+		y += 1;
+		if (y > glob->wlin - 1)
 		{
-			x = 0;
-			y += 2;
+			x += glob->col_size;
+			y = 0;
 		}
 	}
 	glob->cursor = glob->list;
+	reinit_list(glob);
 }
 
 void			reinit_list(t_glob *glob)
@@ -61,15 +65,16 @@ void			reinit_list(t_glob *glob)
 	while (tmp)
 	{
 		data = tmp->data;
-		if (xy[1] < glob->wlin)
-		{
-			if (xy[0] + (int)ft_strlen(data->str) > glob->wcol)
-				next_line(xy, xy + 1);
+		if (xy[0] + glob->col_size < glob->wcol - 1)
 			set_coord(data, xy[0], xy[1]);
-			xy[0] += glob->col_size;
-		}
 		else
 			set_coord(data, -1, -1);
+		xy[1]++;
+		if (xy[1] > glob->wlin - 1)
+		{
+			xy[0] += glob->col_size;
+			xy[1] = 0;
+		}
 		tmp = tmp->next;
 		if (tmp == glob->list)
 			break ;
