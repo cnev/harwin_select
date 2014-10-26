@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/select.h"
+
 static void		print_output(void)
 {
 	t_glob			*glob;

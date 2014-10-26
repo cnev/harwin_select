@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/select.h"
+
 void			signals_on(void)
 {
 	signal(SIGWINCH, signal_handler);

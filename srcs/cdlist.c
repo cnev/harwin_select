@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/select.h"
+
 static t_cdlist		*cdlist_new(void *data)
 {
 	t_cdlist		*new;
@@ -57,7 +59,7 @@ static void			cdlist_freeone(t_cdlist **del)
 	*del = NULL;
 }
 
-void			cdlist_delone(t_cdlist **head, t_cdlist *del)
+void				cdlist_delone(t_cdlist **head, t_cdlist *del)
 {
 	t_cdlist		*prev;
 	t_cdlist		*next;

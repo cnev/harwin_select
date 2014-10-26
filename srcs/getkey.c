@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/select.h"
+
 static t_tab_find	g_tab_find[] =
 {
 	{(int), (int), (int), &move_left},

@@ -10,10 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/select.h"
+
 void			set_coord(t_cdlist *lst, int x, int y)
 {
-	lst->x = x;
-	lst->y = y;
+	lst->->data->x = x;
+	lst->->data->y = y;
 }
 
 void			next_line(int *x, int *y);

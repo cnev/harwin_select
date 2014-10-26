@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "../includes/select.h"
 
 static t_data	*create_data(char *str, int x, int y)
 {

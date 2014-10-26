@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/select.h"
+
 t_glob			get_glob(int end)
 {
 	static t_glob	*donjon = NULL;
@@ -55,4 +57,5 @@ void			ft_exit(void)
 	term_off();
 	get_glob(TRUE);
 	get_termios(TRUE);
+	exit(0);
 }
