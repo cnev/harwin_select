@@ -38,7 +38,7 @@ int				get_fd(void)
 	return (instance);
 }
 
-struct termios	*get_termios(int end)
+t_termios		*get_termios(int end)
 {
 	static struct termios	*instance = NULL;
 
