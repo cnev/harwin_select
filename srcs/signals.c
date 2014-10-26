@@ -48,7 +48,7 @@ void			handle_cont(void)
 	term_on(TERM);
 	signal(SIGCONT, SIG_DFL);
 	signal(SIGTSTP, signal_handler);
-	//print_array(MAP);
+	print_list(get_glob(FALSE));
 }
 
 void			handle_killers(void)

@@ -10,6 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+static void		print_output(void)
+{
+	t_glob			*glob;
+	t_cdlist		*list;
+	int				first;
+
+	first = TRUE;
+	glob = get_glob(FALSE);
+	list = glob->list;
+	while (list)
+	{
+		if (list->data->selected)
+		{
+			if (first)
+				first = FALSE;
+			if (!first)
+				write(FD, " ", 1);
+			write(FD, list->data->str, ft_strlen(list->data->str));
+		}
+		list = list->next;
+	}
+}
+
 int				exec_select(int ac, char **av)
 {
 	char			buf[2048] = "";
