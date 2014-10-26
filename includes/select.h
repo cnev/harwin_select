@@ -30,7 +30,7 @@
 # include "fcntl.h"
 # include "../libft/includes/libft.h"
 
-typedef struct s_termios	t_termios;
+typedef struct termios	t_termios;
 typedef struct		s_cdlist
 {
 	void			*data;

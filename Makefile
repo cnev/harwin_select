@@ -7,11 +7,13 @@ HEADERFOLDER = includes/
 SRC += srcs/cdlist.c
 SRC += srcs/display.c
 SRC += srcs/getkey.c
+SRC += srcs/getkey2.c
 SRC += srcs/list.c
 SRC += srcs/list2.c
 SRC += srcs/main.c
 SRC += srcs/select.c
 SRC += srcs/signals.c
+SRC += srcs/signals2.c
 SRC += srcs/singleton.c
 
 OBJ = $(SRC:%.c=%.o)
