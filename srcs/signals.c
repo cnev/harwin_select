@@ -57,15 +57,3 @@ void			handle_killers(void)
 {
 	ft_exit();
 }
-
-void			signal_handler(int sig)
-{
-	if (sig == SIGTSTP)
-		handle_tstp();
-	if (sig == SIGCONT)
-		handle_cont();
-	if (sig == SIGWINCH)
-		handle_winch();
-	if (sig == SIGINT || sig == SIGTERM)
-		handle_killers();
-}
