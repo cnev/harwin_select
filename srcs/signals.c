@@ -26,10 +26,10 @@ void			handle_winch(void)
 
 	signal(SIGWINCH, SIG_IGN);
 	ioctl(0, TIOCGWINSZ, &w);
-	(MAP)->wcol = w.ws_col;
-	(MAP)->wlin = w.ws_row;
-	reinit_list(MAP);
-	//print_array(MAP);
+	(GLOB)->wcol = w.ws_col;
+	(GLOB)->wlin = w.ws_row;
+	reinit_list(GLOB);
+	print_list(GLOB->list);
 	signal(SIGWINCH, signal_handler);
 }
 
@@ -50,7 +50,7 @@ void			handle_cont(void)
 	term_on(TERM);
 	signal(SIGCONT, SIG_DFL);
 	signal(SIGTSTP, signal_handler);
-	print_list(get_glob(FALSE));
+	print_list(GLOB->list);
 }
 
 void			handle_killers(void)

@@ -12,59 +12,63 @@
 
 #include "../includes/select.h"
 
-static void			print_selected(char *tmp, int fd)
+static void			print_selected(t_data *tmp, int fd)
 {
 	tputs(tgoto(tgetstr("cm", NULL), X_POS, Y_POS), 1, tputs_putchar);
 	tputs(tgetstr("mr", NULL), 1, tputs_putchar);
-	write(fd, tmp, ft_strlen(tmp));
+	write(fd, tmp->str, ft_strlen(tmp->str));
 	tputs(tgetstr("me", NULL), 1, tputs_putchar);
 }
 
-static void			print_cursor(char *tmp, int fd)
+static void			print_cursor(t_data *tmp, int fd)
 {
 	tputs(tgoto(tgetstr("cm", NULL), X_POS, Y_POS), 1, tputs_putchar);
 	tputs(tgetstr("us", NULL), 1, tputs_putchar);
-	write(fd, tmp, ft_strlen(tmp));
+	write(fd, tmp->str, ft_strlen(tmp->str));
 	tputs(tgetstr("ue", NULL), 1, tputs_putchar);
 }
 
-static void			print_selected_cursor(char *tmp, int fd)
+static void			print_selected_cursor(t_data *tmp, int fd)
 {
 	tputs(tgoto(tgetstr("cm", NULL), X_POS, Y_POS), 1, tputs_putchar);
 	tputs(tgetstr("mr", NULL), 1, tputs_putchar);
 	tputs(tgetstr("us", NULL), 1, tputs_putchar);
-	write(fd, tmp, ft_strlen(tmp));
+	write(fd, tmp->str, ft_strlen(tmp->str));
 	tputs(tgetstr("ue", NULL), 1, tputs_putchar);
 	tputs(tgetstr("me", NULL), 1, tputs_putchar);
 }
 
-static void			print_default(char *tmp, int fd)
+static void			print_default(t_data *tmp, int fd)
 {
 	tputs(tgoto(tgetstr("cm", NULL), X_POS, Y_POS), 1, tputs_putchar);
-	write(fd, tmp, ft_strlen(tmp));
+	write(fd, tmp->str, ft_strlen(tmp->str));
 }
 
-void				print_list(t_glob *glob)
+void				print_list(t_cdlist *tmp)
 {
-	t_cdlist		*tmp;
+	t_data			*data;
 
-	tmp = glob->list;
+	tputs(tgoto(tgetstr("cm", NULL), 0, 0), 1, tputs_putchar);
+	tputs(tgetstr("cd", NULL), 1, tputs_putchar);
 	while (tmp)
 	{
-		if (tmp == glob->list)
+		data = tmp->data;
+		if (tmp == GLOB->cursor)
 		{
-			if (tmp->data->selected)
-				print_selected_cursor(tmp->data->str, FD);
+			if (data->selected)
+				print_selected_cursor(data, FD);
 			else
-				print_cursor(tmp->data->str, FD);
+				print_cursor(data, FD);
 		}
 		else
 		{
-			if (tmp->data->selected)
-				print_selected(tmp->data->str, FD);
+			if (data->selected)
+				print_selected(data, FD);
 			else
-				print_default(tmp->data->str, FD);
+				print_default(data, FD);
 		}
 		tmp = tmp->next;
+		if (tmp == GLOB->list)
+			break ;
 	}
 }

@@ -12,7 +12,7 @@
 
 #include "../includes/select.h"
 
-t_glob			get_glob(int end)
+t_glob			*get_glob(int end)
 {
 	static t_glob	*donjon = NULL;
 
@@ -38,7 +38,7 @@ int				get_fd(void)
 	return (instance);
 }
 
-void			*get_termios(int end)
+struct termios	*get_termios(int end)
 {
 	static struct termios	*instance = NULL;
 
@@ -54,8 +54,14 @@ void			*get_termios(int end)
 
 void			ft_exit(void)
 {
-	term_off();
+	term_off(TERM);
 	get_glob(TRUE);
 	get_termios(TRUE);
 	exit(0);
+}
+
+int				tputs_putchar(int c)
+{
+	write(FD, &c, 1);
+	return (1);
 }

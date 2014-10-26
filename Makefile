@@ -4,13 +4,23 @@ CFLAGS = -Wall -Wextra -Werror -O3
 SRCFOLDER = srcs
 HEADERFOLDER = includes/
 
+SRC += srcs/cdlist.c
+SRC += srcs/display.c
+SRC += srcs/getkey.c
+SRC += srcs/list.c
+SRC += srcs/list2.c
+SRC += srcs/main.c
+SRC += srcs/select.c
+SRC += srcs/signals.c
+SRC += srcs/singleton.c
+
 OBJ = $(SRC:%.c=%.o)
 LIB = libft/
 
 all: $(NAME)
 
 $(NAME): $(OBJ) lib
-	@$(CC) $(CFLAGS) -Llibft/ -lft -g -o $(NAME) $(OBJ)
+	@$(CC) $(CFLAGS) -Llibft/ -lft -L /usr/lib -ltermcap -o $(NAME) $(OBJ)
 
 %.o: %.c
 	@echo "Building $@"

@@ -12,14 +12,14 @@
 
 #include "../includes/select.h"
 
-void			set_coord(t_cdlist *lst, int x, int y)
+void			set_coord(t_data *data, int x, int y)
 {
-	lst->->data->x = x;
-	lst->->data->y = y;
+	data->x = x;
+	data->y = y;
 }
 
-void			next_line(int *x, int *y);
+void			next_line(int *x, int *y)
 {
-	*x = 0
+	*x = 0;
 	*y += 2;
 }

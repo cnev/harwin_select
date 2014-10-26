@@ -14,12 +14,13 @@
 
 static t_tab_find	g_tab_find[] =
 {
-	{(int), (int), (int), &move_left},
-	{(int), (int), (int), &move_right},
-	{(int), (int), (int), &selectk},
-	{(int), (int), (int), &deletek},
-	{(int), (int), (int), &ft_exit},
-	{(int), (int), (int), NULL},
+	{(int)27, (int)91, (int)68, &move_left},
+	{(int)27, (int)91, (int)67, &move_right},
+	{(int)32, (int)0, (int)0, &selectk},
+	{(int)127, (int)0, (int)0, &deletek},
+	{(int)27, (int)91, (int)51, &deletek2},
+	{(int)27, (int)0, (int)0, &ft_exit},
+	{(int)0, (int)0, (int)0, NULL},
 };
 
 void			get_key(char *buf2)
@@ -29,7 +30,7 @@ void			get_key(char *buf2)
 	i = -1;
 	while (g_tab_find[++i].f)
 	{
-		if (buf2[0] == key1 && buf2[1] == key2 && buf2[2] == key3)
+		if (buf2[0] == KEY1 && buf2[1] == KEY2 && buf2[2] == KEY3)
 			g_tab_find[i].f();
 	}
 }
@@ -52,6 +53,15 @@ void			selectk(void)
 	tmp->selected = (tmp->selected) ? FALSE : TRUE;
 }
 
+void			deletek2(void)
+{
+	char			bu[4] = "";
+
+	read(0, bu, 3);
+	if (bu[0] == 126 && bu[1] == 0 && bu[2] == 0)
+		deletek();
+}
+
 void			deletek(void)
 {
 	t_glob			*glob;
@@ -63,6 +73,7 @@ void			deletek(void)
 	next = tmp->next;
 	if (tmp == tmp->next)
 		ft_exit();
-	//del
+	cdlist_delone(&(glob->list), tmp);
 	glob->cursor = next;
+	reinit_list(GLOB);
 }

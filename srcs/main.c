@@ -10,9 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/select.h"
+
 int				main(int ac, char **av)
 {
-	if !(getenv("TERM"))
+	if (!(getenv("TERM")))
 	{
 		ft_putstr_fd("environment error\n", 2);
 		return (0);
