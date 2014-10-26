@@ -30,6 +30,7 @@
 # define KEY2				g_tab_find[i].key2
 # define KEY3				g_tab_find[i].key3
 # define BAD_COORD			check_before_display(X_POS, Y_POS)
+
 typedef struct termios		t_termios;
 typedef struct				s_cdlist
 {
