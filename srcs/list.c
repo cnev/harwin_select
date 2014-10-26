@@ -50,25 +50,23 @@ static void		init_list(t_glob *glob, int ac, char **av)
 
 void			reinit_list(t_glob *glob)
 {
-	int				x;
-	int				y;
+	int				xy[2];
 	t_cdlist		*tmp;
 	t_data			*data;
 
 	tmp = glob->list;
 	if (!tmp)
 		return ;
-	x = 0;
-	y = 0;
+	ft_bzero(xy, sizeof(int) * 2);
 	while (tmp)
 	{
 		data = tmp->data;
-		if (y < glob->wlin)
+		if (xy[1] < glob->wlin)
 		{
-			if (x + (int)ft_strlen(data->str) > glob->wcol)
-				next_line(&x, &y);
-			set_coord(data, x, y);
-			x += glob->col_size;
+			if (xy[0] + (int)ft_strlen(data->str) > glob->wcol)
+				next_line(xy, xy + 1);
+			set_coord(data, xy[0], xy[1]);
+			xy[0] += glob->col_size;
 		}
 		else
 			set_coord(data, -1, -1);

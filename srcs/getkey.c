@@ -55,8 +55,9 @@ void			selectk(void)
 
 void			deletek2(void)
 {
-	char			bu[4] = "";
+	char			bu[4];
 
+	ft_bzero(bu, 4);
 	read(0, bu, 3);
 	if (bu[0] == 126 && bu[1] == 0 && bu[2] == 0)
 		deletek();

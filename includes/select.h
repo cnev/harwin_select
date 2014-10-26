@@ -30,6 +30,7 @@
 # include "fcntl.h"
 # include "../libft/includes/libft.h"
 
+typedef struct s_termios	t_termios;
 typedef struct		s_cdlist
 {
 	void			*data;
@@ -73,50 +74,48 @@ void				print_list(t_cdlist *tmp);
 /*
 ** getkey.c
 */
-void			get_key(char *buf2);
-void			move_left(void);
-void			move_right(void);
-void			selectk(void);
-void			deletek2(void);
-void			deletek(void);
+void				get_key(char *buf2);
+void				move_left(void);
+void				move_right(void);
+void				selectk(void);
+void				deletek2(void);
+void				deletek(void);
 
 /*
 ** list.c
 */
-void			reinit_list(t_glob *glob);
-void			create_list(int ac, char **av);
+void				reinit_list(t_glob *glob);
+void				create_list(int ac, char **av);
 
 /*
 ** list2.c
 */
-void			set_coord(t_data *data, int x, int y);
-void			next_line(int *x, int *y);
+void				set_coord(t_data *data, int x, int y);
+void				next_line(int *x, int *y);
 
 /*
 ** select.c
 */
-void			term_on(struct termios *term);
-void			term_off(struct termios *term);
-int				exec_select(int ac, char **av);
+void				term_on(t_termios *term);
+void				term_off(t_termios *term);
+int					exec_select(int ac, char **av);
 
 /*
 ** signals.c
 */
-void			signals_on(void);
-void			handle_winch(void);
-void			handle_tstp(void);
-void			handle_cont(void);
-void			handle_killers(void);
-void			signal_handler(int sig);
+void				signals_on(void);
+void				handle_winch(void);
+void				handle_tstp(void);
+void				handle_cont(void);
+void				handle_killers(void);
+void				signal_handler(int sig);
 
 /*
 ** singleton.c
 */
-t_glob			*get_glob(int end);
-int				get_fd(void);
-struct termios	*get_termios(int end);
-void			ft_exit(void);
-int				tputs_putchar(int c);
-
+t_glob				*get_glob(int end);
+int					get_fd(void);
+struct termios		*get_termios(int end);
+void				ft_exit(void);
+int					tputs_putchar(int c);
 #endif
-

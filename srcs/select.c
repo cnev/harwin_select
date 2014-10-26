@@ -21,10 +21,10 @@ static void		init_win(void)
 	(GLOB)->wlin = w.ws_row;
 }
 
-void			term_on(struct termios *term)
+void			term_on(t_termios *term)
 {
-	tputs(tgetstr("ti", NULL), 1, tputs_putchar);
-	tputs(tgetstr("vi", NULL), 1, tputs_putchar);
+	tputs(tgetstr("ti", NULL), 1, &tputs_putchar);
+	tputs(tgetstr("vi", NULL), 1, &tputs_putchar);
 	tcgetattr(0, term);
 	term->c_lflag &= ~(ICANON | ECHO);
 	term->c_lflag |= ISIG;
@@ -33,10 +33,10 @@ void			term_on(struct termios *term)
 	tcsetattr(0, 0, term);
 }
 
-void			term_off(struct termios *term)
+void			term_off(t_termios *term)
 {
-	tputs(tgetstr("ve", NULL), 1, tputs_putchar);
-	tputs(tgetstr("te", NULL), 1, tputs_putchar);
+	tputs(tgetstr("ve", NULL), 1, &tputs_putchar);
+	tputs(tgetstr("te", NULL), 1, &tputs_putchar);
 	tcgetattr(0, term);
 	term->c_lflag |= (ICANON | ECHO);
 	term->c_lflag &= (ISIG);
@@ -74,23 +74,23 @@ static void		print_output(void)
 
 int				exec_select(int ac, char **av)
 {
-	char			buf[2048] = "";
-	char			buf2[4] = "";
+	char			buf[2048];
+	char			buf2[4];
 
 	init_win();
 	create_list(ac, av);
 	signals_on();
 	tgetent(buf, getenv("TERM"));
 	term_on(TERM);
+	ft_bzero(buf, 2048);
+	ft_bzero(buf2, 4);
 	while (!(buf2[0] == 10 && buf2[1] == 0 && buf2[2] == 0))
 	{
 		get_key(buf2);
 		print_list(GLOB->list);
-		//buf2[1] = buf2[2] = 0;
 		buf2[1] = 0;
 		buf2[2] = 0;
 		read(0, buf2, 3);
-		//write(FD, buf2, 3);
 	}
 	print_output();
 	ft_exit();
